@@ -1,9 +1,21 @@
 //Layout.jsx
-import React from 'react'
+import React, { useState } from "react";
 import Head from "next/head"
 import styles from "./Layout.module.css";
+import Link from 'next/link';
+import Brightness6Icon from '@mui/icons-material/Brightness6';
 
 const Layout = ({children,  title="World Stats" }) => {
+  const [theme, setTheme] = useState("light");
+  const switchTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      setTheme("light");
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  };
     return (
          <div className={styles.container}>
       <Head>
@@ -13,7 +25,16 @@ const Layout = ({children,  title="World Stats" }) => {
       </Head>
 
       <header className={styles.header}>
-        <img src="./logo.png" alt="World Stats logo" width="150px"/>
+        <Link passHref href="/">
+          <img
+            src="https://i.imgur.com/Y28l856.png"
+            alt="World Stats logo"
+            width="150px"
+          />
+        </Link>
+        <button className={styles.themeSwitcher} onClick={switchTheme}>
+          <Brightness6Icon />
+        </button>
       </header>
 
 
